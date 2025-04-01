@@ -1,43 +1,43 @@
 package LeetCode.BaseballGame_692;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BaseballGame_692 {
     public int calPoints(String[] operations){
 
         int result = 0;
-        int number = 0;
-        int[] numberArray = new int[operations.length];
+        List<Integer> numberList = new ArrayList<>();
 
         for (int i = 0; i < operations.length; i++) {
 
             if (operations[i].matches("D")){
                 int numParaMut;
-                numParaMut = numberArray[i - 1] * 2;
-                numberArray[i] = numParaMut;
-                number += numParaMut; // Se liga
-            } else if (operations[i].matches("C")) {
-                Arrays.copyOf(numberArray, numberArray.length - 1);
-            } else if (operations[i].matches("\\+")) {
-                int numSomado;
-                numSomado = numberArray[i - 1] + numberArray[i - 2];
-                numberArray[i] = numSomado;
-                number += numSomado; //Se liga
-            } else {
-                int numParaInserir = Integer.parseInt(operations[i]);
-                numberArray[i] = numParaInserir;
-                System.out.println("numberArray: " + numberArray[i]);
-                number += numParaInserir;
+                numParaMut = numberList.get(numberList.size() - 1) * 2;
+                numberList.add(numParaMut);
             }
 
-            System.out.println("Valor de número: " + number);
+            else if (operations[i].matches("C")) {
+                numberList.remove(numberList.size() - 1);
+
+            }
+
+            else if (operations[i].matches("\\+")) {
+                int numSomado;
+                numSomado = numberList.get(numberList.size() - 1) + numberList.get(numberList.size() - 2);
+                numberList.add(numSomado);
+            }
+
+            else {
+                int numParaInserir = Integer.parseInt(operations[i]);
+                numberList.add(numParaInserir);
+            }
 
         }
 
-        for (int i = 0; i < numberArray.length; i++) {
-            result += numberArray[i];
+        for (int i = 0; i < numberList.size(); i++) {
+            result += numberList.get(i);
         }
-
 
         return result;
     }
@@ -45,7 +45,7 @@ public class BaseballGame_692 {
     public static void main(String[] args) {
         BaseballGame_692 baseballGame692 = new BaseballGame_692();
 
-        String[] test = {"5","2","C","D","+"};
+        String[] test = {"5","-2","4","C","D","9","+","+"};
         System.out.println(baseballGame692.calPoints(test));
     }
 }
