@@ -12,7 +12,7 @@ public class LPTriangle_976 {
             int a = nums[i - 2];
             int b = nums[i - 1];
             int c = nums[i];
-            
+
             if (a + b > c) {
                 return a + b + c;
             }
