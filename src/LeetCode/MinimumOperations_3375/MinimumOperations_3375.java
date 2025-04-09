@@ -1,46 +1,31 @@
 package LeetCode.MinimumOperations_3375;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class MinimumOperations_3375 {
-
     public int minOperations(int[] nums, int k){
-        int result = 0;
-        int refValue = 0;
         Arrays.sort(nums);
-
-        List<Integer> numsList = new ArrayList<>();
-
-        for (int num : nums) {
-            numsList.add(num);
-        }
-
-        numsList.sort(Collections.reverseOrder());
+        int result = 0;
+        int refValue = nums[nums.length - 1];
 
         if (k <= nums[0]){
 
-            for (int i = 0; i < nums.length; i++) {
-                refValue = numsList.get(0);
+            for (int i = nums.length - 1; i >= 0; i--) {
 
-                if (numsList.get(i) < refValue){
-                    refValue = numsList.get(i);
+                if (nums[i] < refValue){
+                    refValue = nums[i];
                     result++;
                 }
             }
+            return (refValue > k) ? result + 1 : result;
 
-        } else result = -1;
-
-        return (refValue > k) ? result + 1 : result;
+        } else return -1;
     }
 
     public static void main(String[] args) {
         MinimumOperations_3375 minOpe = new MinimumOperations_3375();
 
-        int[] input1 = {9, 10 , 9};
-        int k1 = 6;
+        int[] input1 = {6, 9, 2, 2};
+        int k1 = 5;
 
         int[] input2 = {2,1,2};
         int k2 = 2;
