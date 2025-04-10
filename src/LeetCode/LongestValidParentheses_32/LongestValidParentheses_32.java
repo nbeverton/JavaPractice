@@ -3,24 +3,20 @@ package LeetCode.LongestValidParentheses_32;
 public class LongestValidParentheses_32 {
 
     public int longestValidParentheses(String s){
-        int parAbrir = 0;
-        int parFech = 0;
+        int count = 0;
 
-        char[] sArray = s.toCharArray();
+        for (int i = 0; i < s.length() - 1; i++) {
 
-        for (char element: sArray) {
-            if (element == '(' ){
-                parAbrir++;
+            String sRef = s.substring(i, i + 1);
+            String sClose = s.substring(i + 1);
+
+            if (sRef.equals("(") && sClose.contains(")")){
+                count++;
             }
 
-            if (element == ')' ){
-                parFech++;
-            }
         }
 
-        if (parAbrir >= parFech){
-            return parFech * 2;
-        } else return parAbrir * 2;
+        return count;
     }
 
     public static void main(String[] args) {
