@@ -10,16 +10,37 @@ public class CountLargestGroup_1399 {
         // Valor = quantas vezes apareceu a soma
         Map<Integer, Integer> pairs = new HashMap<>();
 
-
-        for (int i = 1; i < n; i++) {
-            int sum = 0;
-            sum += i % 10;
-            System.out.println(sum);
+        for (int i = 1; i <= n; i++) {
+            int sum = getDigitsSum(i);
+            pairs.put(sum, pairs.getOrDefault(sum, 0) +1);
         }
 
+        int maxGroupSize = 0;
+        for (int value : pairs.values()) {
+            if (value > maxGroupSize){
+                maxGroupSize = value;
+            }
+        }
 
-        return 0;
+        int count = 0;
+        for (int value : pairs.values()) {
+            if (value == maxGroupSize){
+                count++;
+            }
+        }
+
+        return count;
     }
+
+        public int getDigitsSum(int num){
+            int sum = 0;
+
+            while(num > 0){
+                sum += num % 10;
+                num /= 10;
+            }
+            return sum;
+        }
 
     public static void main(String[] args) {
         CountLargestGroup_1399 countLargestGroup1399 = new CountLargestGroup_1399();
