@@ -1,20 +1,16 @@
 package LeetCode.Junho.JewelsAndStones_771;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class JewelsAndStones_771 {
     public int numJewelsInStones(String jewels, String stones) {
-//        Set<Character> jewelsSet = new HashSet<>();
         int res = 0;
 
         char[] stonesArray = stones.toCharArray();
         char[] jewelsArray = jewels.toCharArray();
 
-        for (char c: stonesArray) {
+        for (char s : stonesArray) {
 
-            for (int i = 0; i < jewelsArray.length; i++) {
-                if (jewelsArray[i] == c){
+            for (char j : jewelsArray) {
+                if (j == s) {
                     res++;
                 }
             }
